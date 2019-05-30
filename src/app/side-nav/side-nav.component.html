@@ -1,0 +1,37 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="!(isHandset$ | async)">
+    <div class="profile">
+        <mat-icon color="primary">account_circle</mat-icon>
+        <h4>ADMIN</h4>
+    </div>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="[ '/faculty' ]">Faculty Mangement</a>
+      <a mat-list-item [routerLink]="[ '/course' ]">Course Mangement</a>
+      <a mat-list-item [routerLink]="[ '/department' ]">Department Mangement</a>
+      <a mat-list-item [routerLink]="[ '/batch' ]">Batch Mangement</a>
+      <a mat-list-item [routerLink]="[ '/student' ]">Student Mangement</a>
+      <a mat-list-item [routerLink]="[ '/attendance' ]">Attendance Mangement</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>DBMS-Admin</span>
+      <span class="fil-space"></span>
+      <button mat-raised-button (click)="authSvs.logout()" color="accent">Logout</button>
+    </mat-toolbar>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

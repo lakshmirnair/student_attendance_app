@@ -1,0 +1,46 @@
+<ion-app>
+  <ion-split-pane *ngIf="authSvc.user | async">
+    <ion-menu>
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <div style="padding:24px">
+          <ion-button expand="block" (click)="authSvc.logout()">Logout</ion-button>
+        </div>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
+
+  <ion-content fullscreen padding *ngIf="!(authSvc.user |async)">
+    <form [formGroup]="loginForm" (submit)="login()">
+      <ion-list>
+        <ion-item>
+          <ion-input required type="email" placeholder="Email" formControlName="email" ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input required type="password" placeholder="Password" formControlName="password" ></ion-input>
+        </ion-item>
+      </ion-list>
+      <br>
+      <div>
+        <ion-button expand="block" type="submit" [disabled]="loginForm.invalid">Login</ion-button>
+      </div>
+    </form>
+  </ion-content>
+
+</ion-app>

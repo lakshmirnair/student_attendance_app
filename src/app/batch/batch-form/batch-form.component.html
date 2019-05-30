@@ -1,0 +1,78 @@
+<form [formGroup]="facultyForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card mat-elevation-z0">
+    <mat-card-header>
+      <mat-card-title>Batch Registration</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Course" formControlName="course">
+              <mat-option *ngFor="let item of course|async" [value]="item.id">
+                {{ item.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="facultyForm.controls['course'].hasError('required')">
+              Course is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="semester" formControlName="semester" #SEM>
+              <mat-option *ngFor="let sem of sems" [value]="sem.value">
+                {{ sem.value }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="facultyForm.controls['semester'].hasError('required')">
+              Semester is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Department" formControlName="department" #DPT>
+              <mat-option *ngFor="let item of dpt|async" [value]="item.abbreviation">
+                {{ item.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="facultyForm.controls['department'].hasError('required')">
+              Department is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="section" formControlName="section" #SEC>
+              <mat-option *ngFor="let item of section" [value]="item.value">
+                {{ item.value }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="facultyForm.controls['section'].hasError('required')">
+              Section is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Batch" formControlName="batch" #BATCH>
+              <mat-option *ngFor="let batch of batches" [value]="batch.value">
+                {{ batch.value }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="facultyForm.controls['batch'].hasError('required')">
+              Batch is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="facultyForm.invalid">Create</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

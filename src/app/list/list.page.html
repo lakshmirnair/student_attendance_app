@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Students</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card mode="ios" *ngIf="item; else P">
+    <ion-card-content>
+      <h2>{{item.name}}</h2>
+      <h4>{{item.id}}</h4>
+    </ion-card-content>
+    <div class="buttons">
+      <ion-fab-button (click)="addAttendance(item, false)">
+        <ion-icon name="close"></ion-icon>
+      </ion-fab-button>
+      <span style="width:150px"></span>
+      <ion-fab-button (click)="addAttendance(item, true)">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </div>
+  </ion-card>
+  <ng-template #P>
+    <h2 style="text-align:center"> all are present</h2>
+  </ng-template>
+  
+  
+</ion-content>
